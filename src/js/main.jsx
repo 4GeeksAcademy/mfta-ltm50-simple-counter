@@ -12,19 +12,11 @@ import "../styles/index.css";
 import SecondsCounter from "./components/SecondsCounter";
 
 let count = 0;
-let isCountDown = false;
 setInterval(() => {
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-      <SecondsCounter seconds={count} isCountDown={isCountDown} />
+      <SecondsCounter seconds={count}/>
     </React.StrictMode>
   );
-
-  if (isCountDown && count > 0) {
-    count--;
-  } else if (isCountDown && count === 0) {
-    isCountDown = false;
-  } else if (!isCountDown) {
-    count++;
-  }
+  count++;
 }, 1000);
