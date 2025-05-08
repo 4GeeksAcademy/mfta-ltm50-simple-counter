@@ -11,12 +11,8 @@ import "../styles/index.css";
 // components
 import SecondsCounter from "./components/SecondsCounter";
 
-let count = 0;
-setInterval(() => {
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-      <SecondsCounter seconds={count}/>
-    </React.StrictMode>
-  );
-  count++;
-}, 1000);
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <SecondsCounter />
+  </React.StrictMode>
+);
