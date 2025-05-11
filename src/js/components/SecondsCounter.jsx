@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-const SecondsCounter = ({ seconds}) => {
+const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stopCounter, startCounter, resetCounter}) => {
   const digits = seconds.toString().padStart(6, 0).split("");
 
   return (
@@ -16,7 +16,7 @@ const SecondsCounter = ({ seconds}) => {
         className="text-center fs-1 fw-light fst-italic mb-5"
         style={{ color: "#16a34a" }}
       >
-        Countdown
+        {isCountdown ? "Countdown" : "Count Up"}
       </h2>
 
       {/* COUNTER */}
@@ -29,7 +29,18 @@ const SecondsCounter = ({ seconds}) => {
 
       
       {/* BONUS */}
-      {/* Para implementar las funcionalidades de los bonus se necesita trabajar con variables de estado (en vez del renderizado recurrente con un setinterval)  */}
+      <div className="d-flex gap-2 mt-5">
+              <button className="btn btn-outline-success" onClick={toggleCountdown}>
+                {isCountdown ? "Switch to Count Up" : "Switch to Countdown"}
+              </button>
+              <button 
+                onClick={isRunning ? stopCounter : startCounter} 
+                className={`btn ${isRunning ? "btn-outline-warning" : "btn-outline-success"}`}
+              >
+                {isRunning ? "Pause" : "Resume"}
+              </button>
+              <button onClick={resetCounter} className="btn btn-outline-danger">Reset</button>
+            </div>
     </div>
   );
 };
