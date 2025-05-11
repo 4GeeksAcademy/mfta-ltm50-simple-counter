@@ -77,4 +77,3 @@ const updateCounter = () => {
 renderCounter();
 // Start the counter
 updateCounter();
-

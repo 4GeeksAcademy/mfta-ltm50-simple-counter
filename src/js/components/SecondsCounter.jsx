@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
 const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stopCounter, startCounter, resetCounter}) => {
@@ -27,7 +27,6 @@ const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stop
         ))}
       </div>
 
-      
       {/* BONUS */}
       <div className="d-flex gap-2 mt-5">
               <button className="btn btn-outline-success" onClick={toggleCountdown}>
