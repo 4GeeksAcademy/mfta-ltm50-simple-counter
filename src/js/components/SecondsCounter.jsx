@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const SecondsCounter = () => {
-  const [seconds, setSeconds] = useState(0);
-  const digits = seconds.toString().padStart(6, "0").split("");
-  const [isActive, setIsActive] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isActive) {
-        return;
-      }
-      setSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }
-  , [isActive, setSeconds]);
-
+const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stopCounter, startCounter, resetCounter}) => {
+  const digits = seconds.toString().padStart(6, 0).split("");
 
   return (
     <div className="bg-dark text-white d-flex flex-column min-vh-100 justify-content-start align-items-center text-center p-4">
@@ -31,7 +16,7 @@ const SecondsCounter = () => {
         className="text-center fs-1 fw-light fst-italic mb-5"
         style={{ color: "#16a34a" }}
       >
-        Countdown
+        {isCountdown ? "Countdown" : "Count Up"}
       </h2>
 
       {/* COUNTER */}
@@ -42,26 +27,19 @@ const SecondsCounter = () => {
         ))}
       </div>
 
-      
-      {/* BONUSES */}
+      {/* BONUS */}
       <div className="d-flex gap-2 mt-5">
-        <button
-          className="btn btn-primary"
-          onClick={() => setIsActive(!isActive)}
-        >
-          {isActive ? "Pause" : "Resume"}
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => {
-            setSeconds(0);
-            setIsActive(true);
-          }}
-        >
-          Reset
-        </button>
-      </div>
-
+              <button className="btn btn-outline-success" onClick={toggleCountdown}>
+                {isCountdown ? "Switch to Count Up" : "Switch to Countdown"}
+              </button>
+              <button 
+                onClick={isRunning ? stopCounter : startCounter} 
+                className={`btn ${isRunning ? "btn-outline-warning" : "btn-outline-success"}`}
+              >
+                {isRunning ? "Pause" : "Resume"}
+              </button>
+              <button onClick={resetCounter} className="btn btn-outline-danger">Reset</button>
+            </div>
     </div>
   );
 };
