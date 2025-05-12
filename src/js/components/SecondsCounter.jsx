@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stopCounter, startCounter, resetCounter}) => {
+const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, resumeCounter, pauseCounter, resetCounter}) => {
   const digits = seconds.toString().padStart(6, 0).split("");
 
   return (
@@ -33,7 +33,7 @@ const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stop
                 {isCountdown ? "Switch to Count Up" : "Switch to Countdown"}
               </button>
               <button 
-                onClick={isRunning ? stopCounter : startCounter} 
+                onClick={isRunning ? pauseCounter : resumeCounter} 
                 className={`btn ${isRunning ? "btn-outline-warning" : "btn-outline-success"}`}
               >
                 {isRunning ? "Pause" : "Resume"}

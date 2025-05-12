@@ -1,13 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-
 // index.css'
 import "../styles/index.css";
-
 // components
 import SecondsCounter from "./components/SecondsCounter";
 import CountDownControllers from "./components/CountDownControllers";
@@ -21,12 +18,12 @@ function toggleCountdown() {
   renderCounter();
 };
 
-function stopCounter() {
+function pauseCounter() {
   isRunning = false;
   renderCounter();
 };
 
-function startCounter() {
+function resumeCounter() {
   isRunning = true;
 };
 
@@ -52,8 +49,8 @@ const renderCounter = () => {
       isRunning={isRunning} 
       isCountdown={isCountdown} 
       toggleCountdown={toggleCountdown} 
-      startCounter={startCounter} 
-      stopCounter={stopCounter} 
+      pauseCounter={pauseCounter} 
+      resumeCounter={resumeCounter} 
       resetCounter={resetCounter} 
       />
     </React.StrictMode>
@@ -64,12 +61,12 @@ const renderCounter = () => {
 const updateCounter = () => {
   setInterval(() => {
     if (isRunning && !isCountdown) {
-      renderCounter();
       seconds++;
+      renderCounter();
     }
     if (isRunning && isCountdown) {
-      renderCounter();
       seconds--;
+      renderCounter();
       if (seconds < 0) {
         seconds = 0;
         isRunning = false;
@@ -92,13 +89,11 @@ const inputContainerRoot = ReactDOM.createRoot(inputContainer);
 
 // Initial renders
 renderCounter();
-
 inputContainerRoot.render(
   <React.StrictMode>
     <CountDownControllers startCountdown={startCountdown}/>
   </React.StrictMode>
 );
-
 
 // Start the counter update loop
 updateCounter();
