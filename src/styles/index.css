@@ -9,3 +9,6 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+input.form-control.bg-dark.text-white::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}

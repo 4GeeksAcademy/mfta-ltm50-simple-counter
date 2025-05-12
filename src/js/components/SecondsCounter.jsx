@@ -5,7 +5,7 @@ const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stop
   const digits = seconds.toString().padStart(6, 0).split("");
 
   return (
-    <div className="bg-dark text-white d-flex flex-column min-vh-100 justify-content-start align-items-center text-center p-4">
+    <>
       <h1
         className="text-center mt-5 display-1 fw-medium"
         style={{ color: "#a855f7" }}
@@ -40,7 +40,7 @@ const SecondsCounter = ({ seconds, isRunning, isCountdown, toggleCountdown, stop
               </button>
               <button onClick={resetCounter} className="btn btn-outline-danger">Reset</button>
             </div>
-    </div>
+    </>
   );
 };
 

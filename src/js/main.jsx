@@ -10,34 +10,42 @@ import "../styles/index.css";
 
 // components
 import SecondsCounter from "./components/SecondsCounter";
+import CountDownControllers from "./components/CountDownControllers";
 
 let seconds = 0;
 let isRunning = true;
 let isCountdown = false;
 
-const toggleCountdown = () => {
+function toggleCountdown() {
   isCountdown = !isCountdown;
   renderCounter();
 };
 
-const stopCounter = () => {
+function stopCounter() {
   isRunning = false;
   renderCounter();
 };
 
-const startCounter = () => {
+function startCounter() {
   isRunning = true;
 };
 
-const resetCounter = () => {
+function resetCounter() {
   seconds = 0;
   isCountdown = false;
   isRunning = true;
 };
 
+function startCountdown({ countdownSeconds }) {
+  seconds = countdownSeconds;
+  isCountdown = true;
+  isRunning = true;
+  renderCounter();
+}
+
 // Function to render the component
 const renderCounter = () => {
-  ReactDOM.createRoot(document.getElementById("root")).render(
+  counterContainerRoot.render(
     <React.StrictMode>
       <SecondsCounter 
       seconds={seconds} 
@@ -73,7 +81,24 @@ const updateCounter = () => {
   }, 1000);
 };
 
-// Initial render
+
+// Create a root element for the countdown display and buttons
+const counterContainer = document.getElementById("counter-container");
+const counterContainerRoot = ReactDOM.createRoot(counterContainer);
+// Create a root element for the countdown controllers
+const inputContainer = document.getElementById("input-container");
+const inputContainerRoot = ReactDOM.createRoot(inputContainer);
+
+
+// Initial renders
 renderCounter();
-// Start the counter
+
+inputContainerRoot.render(
+  <React.StrictMode>
+    <CountDownControllers startCountdown={startCountdown}/>
+  </React.StrictMode>
+);
+
+
+// Start the counter update loop
 updateCounter();
